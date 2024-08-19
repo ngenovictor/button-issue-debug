@@ -31,13 +31,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +48,14 @@ class MyHomePage extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: const Color.fromARGB(255, 58, 58, 58)),
-            child: Text("TestButton"),
+                backgroundColor:
+                    WidgetStateColor.resolveWith((Set<WidgetState> states) {
+                  if (states.contains(WidgetState.hovered)) {
+                    return Colors.red;
+                  }
+                  return const Color.fromARGB(255, 58, 58, 58);
+                })),
+            child: const Text("TestButton"),
           ),
         ));
   }
